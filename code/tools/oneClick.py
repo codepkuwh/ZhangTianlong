@@ -1,6 +1,5 @@
 # 用于读取文件，并自动按教案、录屏、听课报告分类上传的脚本
 
-
 import logging
 import os
 import sys
@@ -77,6 +76,16 @@ def read_file():
 
 
 def upload(session, file):
+    """
+    视频上传：
+    首先 post 请求 https://video.wuhan.codepku.com/files
+    header 中 Upload-Length 是文件大小，Upload-Metadata 是文件信息，用 base64 编码
+    返回一个 json 包含：file_path，location，name，status
+    然后 patch 请求 https://video.wuhan.codepku.com/files/ + location最后的key
+    用于上传视频文件文件
+    最后 post https://www.codepku.com/jwgl_api/lesson-prepare/lesson-prepare-submit
+    需要提供 Authorization，需要进行 atob
+    """
     headers = {
         # 'Upload-Length': '119471479',
         'Origin': 'https://www.codepku.com',

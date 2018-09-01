@@ -12,9 +12,22 @@
 ### renameToPL.py
 将录屏重命名，并移动到对应 level，对应节数，对应班级的文件夹中
 
+### run_brook
+包含两个文件：
+
+1. brook.exe 
+   一个翻墙软件，通过cmd调用
+2. run_brook.py 
+   自动爬虫可用代理，并运行 brook 的脚本，需要管理员权限（修改hosts)。会生成一个 log 文件。
+
+用法：
+
+  将两个文件放在同一目录下，运行 run_brook.py
+
 ### oneClick.py
 用于一键上传教案、录屏、听课报告等（尚未完成）
 TODO:
+
 - [x] 登录
 - [ ] 文件自动分类
 - [ ] 文件上传

@@ -36,6 +36,10 @@ TODO:
 - [ ] doc 文件的上传
 - [ ] 课堂录屏的上传
 
+### reform.js
+修正新版编辑界面的布局以及输出结果的换行问题
+保存为小标签即可。
+
 # /note
 用于存放学习笔记
 ### tailRecurseOptimized.py

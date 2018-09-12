@@ -13,8 +13,8 @@ from bs4 import BeautifulSoup
 logging.basicConfig(
     format='%(asctime)s-[%(levelname)s]-%(message)s', level=logging.DEBUG)
 
-USER_NAME = "18086662005"
-PSW = "Bw711286114"
+USER_NAME = "phone number"
+PSW = "password"
 
 work_path = sys.path[0]
 locate = ""   # 16 楼为空，28 楼为 28

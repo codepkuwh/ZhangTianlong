@@ -1,5 +1,5 @@
 document.getElementById("result").setAttribute("style", "height: 660px; font-size:28px;");
-document.getElementById("print_output").setAttribute("style", "height: 630px; font-size:28px;");
+document.getElementById("print_output").setAttribute("style", "height: 630px; font-size:28px; word-wrap:break-word;");
 document.querySelector(".content_right").prepend(document.querySelector(".run_btn"));
 document.querySelector(".run_btn").style.left = "10%";
 document.querySelector(".run_btn").style.top = "2%";

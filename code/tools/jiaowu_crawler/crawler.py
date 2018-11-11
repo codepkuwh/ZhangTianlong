@@ -13,8 +13,8 @@ logging.basicConfig(
 )
 
 
-USER_NAME = "18086662005"
-PSW = "Bw711286114"
+USER_NAME = "手机号"
+PSW = "密码"
 teacherId = 76303   # 可能是个常量，在教务系统查看源代码搜索一下teacherId
 
 

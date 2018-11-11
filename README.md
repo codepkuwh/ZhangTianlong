@@ -40,6 +40,9 @@ TODO:
 修正新版编辑界面的布局以及输出结果的换行问题
 保存为小标签即可。
 
+### jiaowu_crawler/jiaowu_crawler.py
+自动爬取续班统计信息并生成 csv 文件，可能会有问题，大家可以测试一下。
+
 # /note
 用于存放学习笔记
 ### tailRecurseOptimized.py

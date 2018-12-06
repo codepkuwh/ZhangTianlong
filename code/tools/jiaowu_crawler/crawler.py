@@ -13,10 +13,10 @@ logging.basicConfig(
 )
 
 
-USER_NAME = "手机号"
-PSW = "密码"
+USER_NAME = "18086662005"
+PSW = "Bw711286114"
 teacherId = 76303   # 可能是个常量，在教务系统查看源代码搜索一下teacherId
-
+date = "2018-12-01"
 
 def get_token():
     headers = {
@@ -167,21 +167,29 @@ def get_students_info(tid, end_time, session, token):
 
     response = session.post(url, headers=headers, data=post_data).json()
     html = response["data"]
-
+    # print(html)
     # 爬取一个班级中每个学生的续班情况
-    for url in parse_students_info(html):
-        response = session.get(url)
-        soup = BeautifulSoup(response.text, "lxml")
-        all_course = soup.select("table > tbody > tr")
-        std_name = soup.select(".top-menu-navibar > ol > li:nth-of-type(2) > span")[0].string
+    for url1, url2 in parse_students_info(html):
+        response = session.get(url1)  # 获取学生姓名用
+        class_details = session.get(url2).json()  # 获取续班信息用
 
+        if class_details["status"] != 1:
+            raise ValueError("请求可能出错了")
+        class_details = class_details["data"]["view"]  # 神秘的一堆ul
+        # print(class_details)
+        soup1 = BeautifulSoup(response.text, "lxml")
+        soup2 = BeautifulSoup(class_details, "lxml")
+        all_course = soup2.select("ul")     
+        std_name = soup1.select("h2.class_name")[0].string
+
+        # print(all_course)
+        # raise
         # 结构化每个人的报班情况
         for course in all_course:
-            # print(course.prettify())
-            course_name = course.select("td:nth-of-type(2)")[0].string
-            pay_time = course.select("td:nth-of-type(3)")[0].string
-            rest_course = course.select("td:nth-of-type(6)")[0].string
-            course_status = course.select("td:nth-of-type(9) > span")[0].string
+            course_name = course.select("li:nth-of-type(1)")[0].string
+            pay_time = course.select("li:nth-of-type(2)")[0].string
+            rest_course = course.select("li:nth-of-type(4)")[0].text.strip()
+            course_status = course.select("li:nth-of-type(6) > span")[0].string
             yield (std_name, course_name, pay_time, rest_course, course_status)
 
 
@@ -192,13 +200,13 @@ def parse_students_info(html):
     soup = BeautifulSoup(html, "lxml")
     for item in soup.select("tr > td:nth-of-type(3) > a"):
         url = item["href"]
-        yield url
+        yield url, url.replace("detail", "class_detail")
 
 
 def run():
     session, token = get_token()
     session = login(session, token)
-    html, session, token = get_schedule(76303, "2018-11-06", session, token)
+    html, session, token = get_schedule(teacherId, date, session, token)
 
     with open(os.path.join(os.path.dirname(__file__), "schedule.csv"), "w") as f:
         with open(os.path.join(os.path.dirname(__file__), "xuban.csv"), "w") as ff:
@@ -217,7 +225,8 @@ def run():
                     else:
                         start, end = str(datetime.now().year)+'.'+start, str(datetime.now().year+1)+'.'+end
                     start, end = datetime.strptime(start, '%Y.%m.%d'), datetime.strptime(end, '%Y.%m.%d')
-                    if rest_course == "12" and start < pay_time:
+
+                    if int(rest_course) >= 12 and start < pay_time:
                         xuban = "True"
                     else:
                         xuban = "False"

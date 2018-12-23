@@ -189,8 +189,9 @@ def get_students_info(tid, end_time, session, token):
             course_name = course.select("li:nth-of-type(1)")[0].string
             pay_time = course.select("li:nth-of-type(2)")[0].string
             rest_course = course.select("li:nth-of-type(4)")[0].text.strip()
+            pre_course = course.select("li:nth-of-type(5)")[0].text.strip()
             course_status = course.select("li:nth-of-type(6) > span")[0].string
-            yield (std_name, course_name, pay_time, rest_course, course_status)
+            yield (std_name, course_name, pay_time, rest_course, pre_course, course_status)
 
 
 def parse_students_info(html):
@@ -215,7 +216,7 @@ def run():
                 _, end_time, _, during, *_, tid = row
 
                 for col in get_students_info(tid, end_time, session, token):
-                    _, _, pay_time, rest_course, *_ = col
+                    _, _, pay_time, rest_course, pre_course, _ = col
                     start, end = during[:-7].split("-")   # 课程开始时间和结束时间
 
                     # 判断是否算续报
@@ -226,7 +227,7 @@ def run():
                         start, end = str(datetime.now().year)+'.'+start, str(datetime.now().year+1)+'.'+end
                     start, end = datetime.strptime(start, '%Y.%m.%d'), datetime.strptime(end, '%Y.%m.%d')
 
-                    if int(rest_course) >= 12 and start < pay_time:
+                    if (int(rest_course) >= 12 or int(pre_course) == 12) and start < pay_time:
                         xuban = "True"
                     else:
                         xuban = "False"

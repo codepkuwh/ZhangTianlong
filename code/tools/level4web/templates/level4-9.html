@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>level4-9</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+    <h1>本页面会有一个异步请求</h1>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="windows8">
+        <div class="wBall" id="wBall_1">
+            <div class="wInnerBall"></div>
+        </div>
+        <div class="wBall" id="wBall_2">
+            <div class="wInnerBall"></div>
+        </div>
+        <div class="wBall" id="wBall_3">
+            <div class="wInnerBall"></div>
+        </div>
+        <div class="wBall" id="wBall_4">
+            <div class="wInnerBall"></div>
+        </div>
+        <div class="wBall" id="wBall_5">
+            <div class="wInnerBall"></div>
+        </div>
+    </div>
+
+    <input id="click" type="button" value="点我">
+    <div id="data">稍后会返回数据</div>
+
+    <!-- 异步脚本 -->
+    <!-- <script src="/static/js/jquery-3.4.1.min.js"></script> -->
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
+    <script>
+        function loadingEffect() {
+            var loading = $('.windows8');
+            loading.hide();
+            $(document).ajaxStart(function () {
+                loading.show();
+            }).ajaxStop(function () {
+                loading.hide();
+            });
+        }
+        loadingEffect();
+
+        $("#click").click(function () {
+            $.ajax({
+                url: "{{ url_for('level4_9_handle') }}",
+                success: function (result) {
+
+                    $("#data").html(result);
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -16,7 +16,7 @@ logging.basicConfig(
 USER_NAME = "18086662005"
 PSW = "Bw711286114"
 teacherId = 76303   # 可能是个常量，在教务系统查看源代码搜索一下teacherId
-date = "2018-12-01"
+date = "2019-01-01"
 
 def get_token():
     headers = {

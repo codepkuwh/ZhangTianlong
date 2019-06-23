@@ -58,17 +58,13 @@ def login(session, token):
     return session
 
 
-
-
-
-
 # 登录情况下, 仅get目标网页源码
 def get_html(url):
-      session, token = get_token()
-      session = login(session, token)
-      res = session.get(url)
-      html = res.content.decode("utf-8")
-      return html
+    session, token = get_token()
+    session = login(session, token)
+    res = session.get(url)
+    html = res.content.decode("utf-8")
+    return html
 
 
 # 获取未过期班级的作业审批信息, 生成作业提交提醒

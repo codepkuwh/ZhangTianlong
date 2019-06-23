@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>level4-5</title>
+</head>
+
+<body>
+    <h1>现在来试试不同的状态码吧！</h1>
+    <ol> task：
+        <li>直接在 URL 后面加上状态码看看</li>
+        <li>这里有张图片，试着把它爬下来吧</li>
+        <img src="{{ url_for('static', filename='assets/hx.png') }}" alt="浣熊">
+        <li>本页面有一个音频文件，你能找到它吗？</li>
+    </ol>
+    <audio autoplay loop>
+        <source src="{{ url_for('static', filename='assets/background.ogg') }}" type="audio/mp3">
+        <!-- <source src="http://dl.stream.qqmusic.qq.com/M500001KN8kQ0GftIO.mp3?vkey=657904508657A32CB6EF6F49D7E4019D947CE76DE4966AB9B6212A8908FCEC077A98AB7073649F0A7E3D03D08012F20E4D1D90DB295DC4E1&guid=5150825362&fromtag=1" type="audio/mp3"> -->
+        Your browser does not support the audio tag.
+    </audio>
+</body>
+
+</html>

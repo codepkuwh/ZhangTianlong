@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>level4-7</title>
+</head>
+
+<body>
+    <h1>使用 BeautifulSoup 找到黄色格子的宝藏</h1>
+    <table>
+        <tbody>
+            {%for r in range(row)%}
+            <tr>
+                {%for c in range(col)%}
+                {% if (r, c) == target %}
+                    <td style="background-color: yellow; width: 100px; height: 30px;">宝藏</td>
+                {%else%}
+                    <td style="background-color: teal; width: 100px; height: 30px;"></td>
+                {% endif %}
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+
+</html>

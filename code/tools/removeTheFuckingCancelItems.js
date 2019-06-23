@@ -1,8 +1,10 @@
-var parent = document.querySelector("table tbody");
-var childs = document.querySelectorAll("tr[style='background: #F8F8F8;']");
+var parent = document.querySelector('tbody');
+var childs = document.querySelectorAll('tr.el-table__row');
 
 childs.forEach(function (item) {
-    parent.removeChild(item);
+    if (item.querySelector('td.el-table_1_column_11 > div').innerText === "已取消") {
+        parent.removeChild(item);
+    }
 })
 
 

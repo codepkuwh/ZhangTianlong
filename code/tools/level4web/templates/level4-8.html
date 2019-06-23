@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>level4-8</title>
+</head>
+
+<body>
+    <h1>通过下面的链接，找到最终的页面</h1>
+    {% if num == 0 %}
+        <div><a href="{{ url_for('level4_8_handle', num=1, _external=True) }}"><span>从我开始</span></a></div>
+    {% else %}
+        <div><a href="{{ url_for('level4_8_handle', num=next_, _external=True) }}">next: <span>{{ next_ }}</span></a></div>
+    {% endif %}
+    <p><strong>PS: 只有通过上一个链接才能找到下一个 URL，URL 后面的数字是实时随机生成的</strong></p>
+    <p><strong>PS: 需要跳转 10 次</strong></p>
+</body>
+
+</html>

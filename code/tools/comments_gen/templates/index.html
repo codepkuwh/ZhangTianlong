@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>评价生成</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" />
+</head>
+
+<body class="bg-light">
+  <!-- 选项卡面板 -->
+  <div class="container">
+    <h1 class="page-header">评价生成</h1>
+    <!--tabs-left:选项卡在左边显示  -->
+    <div class="tabbable">
+      <!--nav-pills，nav-tabs，nav-stacked :改变选项卡的样式-->
+      <ul class="nav nav-tabs">
+        <li class="active"><a href="#tab1" data-toggle="tab">生成评价</a>
+        </li>
+        <li><a href="#tab2" data-toggle="tab">提交评价</a>
+        </li>
+      </ul>
+      <!-- 选项卡相对应的内容 -->
+      <div class="tab-content">
+        <div class="tab-pane active" id="tab1">
+          <p></p>
+          <form action="/" method="POST" class="form col-md-12" role="form">
+            <input type="text" name="type" hidden value="gen">
+            <div class="row">
+              <div class="form-group col-md-4">
+                <label for="ComputeThinking" class="">计算思维：</label>
+                <input name="ComputeThinking" type="text" class="form-control" placeholder="请填入6到10之间的数字" />
+              </div>
+              <div class="form-group col-md-4">
+                <label for="LogicThinking" class="">逻辑思维：</label>
+                <input name="LogicThinking" type="text" class="form-control" placeholder="请填入6到10之间的数字" />
+              </div>
+              <div class="form-group col-md-4">
+                <label for="ProblemAnalysis" class="">问题分析：</label>
+                <input name="ProblemAnalysis" type="text" class="form-control" placeholder="请填入6到10之间的数字" />
+              </div>
+            </div>
+            <!-- end row -->
+            <div class="row">
+              <div class="form-group col-md-4">
+                <label for="Practice" class="">动手实践：</label>
+                <input name="Practice" type="text" class="form-control" placeholder="请填入6到10之间的数字" />
+              </div>
+              <div class="form-group col-md-4">
+                <label for="Innovative" class="">创新思维：</label>
+                <input name="Innovative" type="text" class="form-control" placeholder="请填入6到10之间的数字" />
+              </div>
+              <div class="form-group col-md-4">
+                <label for="HomeWork" class="">作业情况：</label>
+                <input name="HomeWork" type="text" class="form-control" placeholder="请填入6到10之间的数字" />
+              </div>
+            </div>
+            <!-- end row -->
+            <div class="row">
+              <div class="form-group col-md-4">
+                <label for="Performance" class="">课堂表现：</label>
+                <input name="Performance" type="text" class="form-control" placeholder="请填入6到10之间的数字" />
+              </div>
+            </div>
+            <!-- end row -->
+            <div class="row">
+              <div class="form-group col-md-12">
+                <label for="result" class="">结果：</label>
+                <textarea name="result" class="form-control" rows="5">{{ output }}</textarea>
+              </div>
+            </div>
+            <div class="center-block">
+              <button class="btn btn-default btn-group-lg" type="submit" value="Submit">
+                提交
+              </button>
+            </div>
+          </form>
+        </div>
+        <!-- tab2 -->
+        <div class="tab-pane" id="tab2">
+          <p></p>
+          <form action="/" method="POST" class="form" role="form">
+            <input type="text" name="type" hidden value="submit">
+            <div class="row">
+              <div class="form-group col-md-4">
+                <div class="col-md-3">
+                  <label>分数：</label>
+                  <select name="ComputeThinkingScore" class="form-control">
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                  </select>
+                </div>
+                <div class="col-md-9">
+                  <label>评价：</label>
+                  <input name="ComputeThinking" type="text" class="form-control" placeholder="计算思维" />
+                </div>
+              </div> <!-- end group -->
+              <div class="form-group col-md-4">
+                <div class="col-md-3">
+                  <label>分数：</label>
+                  <select name="LogicThinkingScore" class="form-control">
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                  </select>
+                </div>
+                <div class="col-md-9">
+                  <label>评价：</label>
+                  <input name="LogicThinking" type="text" class="form-control" placeholder="逻辑思维" />
+                </div>
+              </div> <!-- end group -->
+              <div class="form-group col-md-4">
+                <div class="col-md-3">
+                  <label>分数：</label>
+                  <select name="ProblemAnalysisScore" class="form-control">
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                  </select>
+                </div>
+                <div class="col-md-9">
+                  <label>评价：</label>
+                  <input name="ProblemAnalysis" type="text" class="form-control" placeholder="问题分析" />
+                </div>
+              </div> <!-- end group -->
+            </div> <!-- end row -->
+            <div class="row">
+              <div class="form-group col-md-4">
+                <div class="col-md-3">
+                  <label>分数：</label>
+                  <select name="PracticeScore" class="form-control">
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                  </select>
+                </div>
+                <div class="col-md-9">
+                  <label>评价：</label>
+                  <input name="Practice" type="text" class="form-control" placeholder="动手实践" />
+                </div>
+              </div> <!-- end group -->
+              <div class="form-group col-md-4">
+                <div class="col-md-3">
+                  <label>分数：</label>
+                  <select name="InnovativeScore" class="form-control">
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                  </select>
+                </div>
+                <div class="col-md-9">
+                  <label>评价：</label>
+                  <input name="Innovative" type="text" class="form-control" placeholder="创新思维" />
+                </div>
+              </div> <!-- end group -->
+              <div class="form-group col-md-4">
+                <div class="col-md-3">
+                  <label>分数：</label>
+                  <select name="HomeWorkScore" class="form-control">
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                  </select>
+                </div>
+                <div class="col-md-9">
+                  <label>评价：</label>
+                  <input name="HomeWork" type="text" class="form-control" placeholder="作业情况" />
+                </div>
+              </div> <!-- end group -->
+            </div> <!-- end row -->
+            <div class="row">
+              <div class="form-group col-md-4">
+                <div class="col-md-3">
+                  <label>分数：</label>
+                  <select name="PerformanceScore" class="form-control">
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                  </select>
+                </div>
+                <div class="col-md-9">
+                  <label>评价：</label>
+                  <input name="Performance" type="text" class="form-control" placeholder="课堂表现" />
+                </div>
+              </div> <!-- end group -->
+              <div class="form-group col-md-4">
+                <div class="col-md-3">
+                  <label>分数：</label>
+                  <select name="OtherScore" class="form-control">
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                  </select>
+                </div>
+                <div class="col-md-9">
+                  <label>评价：</label>
+                  <input name="Other" type="text" class="form-control" placeholder="其他" />
+                </div>
+              </div> <!-- end group -->
+            </div> <!-- end row -->
+            <div class="row">
+              <div class="col-md-12">
+              <div class="form-group col-md-12">
+                <label for="result" class="">结果：</label>
+                <textarea name="result" class="form-control" rows="5">{{ output }}</textarea>
+              </div>
+            
+            </div>
+            <div class="center-block col-md-12">
+              <div class="col-md-12">
+              <button class="btn btn-default btn-group-lg" type="submit" value="Submit">
+                提交
+              </button>
+            </div>
+            </div>
+          </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.3.1.min.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+  <script>
+    $(function () {
+      $("#myTab a").click(function (e) {
+        e.preventDefault();
+        $(this).tab("show");
+      });
+    })
+  </script>
+</body>
+
+</html>

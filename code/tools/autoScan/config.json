@@ -1,0 +1,13 @@
+{
+    "user": "小明",
+    "user_name": "你的账号",
+    "psw": "你的密码",
+    "teacherid": 0,
+    "archive": true,
+    "PythonDir": "./Python",
+    "NoipDir": "./NOIP",
+    "Scratch": "./Scratch",
+    "Arduino": "./Arduino",
+    "free": "./试听课",
+    "cwd": "./"
+}

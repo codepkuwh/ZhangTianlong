@@ -55,7 +55,7 @@ for filename in filename_list:
 
     # 判断目录是否存在
     if not os.path.exists(target_dir.format(level, class_)):
-        os.mkdir(target_dir.format(level, class_))
+        os.makedirs(target_dir.format(level, class_))
 
     # 移动文件到目标目录
     shutil.move(os.path.join(dir_name, new_name), target_dir.format(level, class_)) 
